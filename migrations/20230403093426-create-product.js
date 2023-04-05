@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.FLOAT
+        type: Sequelize.NUMERIC(10,2)
       },
       CategoryId: {
         type: Sequelize.INTEGER
