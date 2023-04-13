@@ -7,7 +7,7 @@ module.exports = {
         {
             name: 'Samsung Galaxy S23 Ultra',
             price: 1399,
-            CategoryId: 7,
+            CategoryId: 4,
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -31,7 +31,7 @@ module.exports = {
         {
             name: 'Doritos Tex Mex',
             price: 0.89,
-            CategoryId: 4,
+            CategoryId: 2,
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -39,7 +39,7 @@ module.exports = {
         {
             name: 'Magnum 0.44 caliber',
             price: 2000,
-            CategoryId: 5,
+            CategoryId: 3,
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -47,7 +47,7 @@ module.exports = {
         {
             name: '100 years of solitude',
             price: 16.99,
-            CategoryId: 7,
+            CategoryId: 5,
             createdAt: new Date(),
             updatedAt: new Date()
         }
