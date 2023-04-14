@@ -1,5 +1,8 @@
-const { User } = require('../models/index')
+const { User, Token, Sequelize } = require('../models/index')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const { jwt_secret } = require('../config/config.json')['development']
+const { Op } = Sequelize
 
 const UserController = {
   async insert(req, res) {
@@ -11,6 +14,46 @@ const UserController = {
     } catch (error) {
         console.error(error)
         res.status(500).send(error)
+    }
+  },
+
+  async login(req, res) {
+    try {
+      const user = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      })
+      if (!user) {
+        return res.status(400).send({ message: 'Incorrect user/password' })
+      }
+      const isMatch = await bcrypt.compare(req.body.password, user.password)
+      if (!isMatch) {
+        return res.status(400).send({ message: 'Incorrect user/password' })
+      }
+      const token = jwt.sign({ id: user }, jwt_secret)
+      await Token.create({ token, UserId: user.id })
+      res.send({ token, message: `Bienvenido ${user.name}`, user })
+    } catch (error) {
+      console.error(error)
+      res.status(500).send(error)
+    }
+  },
+
+  async logout(req, res) {
+    try {
+      await Token.destroy({
+        where: {
+          [Op.and]: [
+            { UserId: req.user.id },
+            { token: req.headers.authorization }
+          ]
+        }
+      })
+      res.send({ message: 'Logged out successfully' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).send({ message: 'There was a problem while logging out' })
     }
   }
 }
