@@ -8,5 +8,6 @@ router.get('/getById/:id', ProductController.getById)
 router.get('/getByName/:name', ProductController.getByName)
 router.get('/getByPrice', ProductController.getByPrice)
 router.get('/orderByPrice', ProductController.orderByPice)
+router.put('/update/:id', ProductController.update)
 
 module.exports = router

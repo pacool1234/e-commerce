@@ -101,6 +101,21 @@ const ProductController = {
       console.error(error)
       res.status(500).send(error)
     }
+  },
+
+  async update(req, res) {
+    try {
+      await Product.update(req.body,
+        {
+          where: {
+            id: req.params.id
+        }
+      })
+      res.send({ message: 'Product updated' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).send(error)
+    }
   }
 }
 
