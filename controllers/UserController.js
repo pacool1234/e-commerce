@@ -12,12 +12,14 @@ const UserController = {
     try {
       const password = await bcrypt.hash(req.body.password, 10)
       const user = await User.create({...req.body, password})
-      const url = `http://localhost:3000/users/confirm/${req.body.email}`
+      const emailToken = jwt.sign({ email: req.body.email }, jwt_secret, { expiresIn: '48h' })
+      const url = `http://localhost:3000/users/confirm/${emailToken}`
       await transporter.sendMail({
         to: req.body.email,
         subject: 'Confirmation email',
         html: `<h3>Welcome, you are one step away from registering</h3>
-        <a href='${url}'>Click to confirm your email</a>`
+        <a href='${url}'>Click to confirm your email</a>
+        <p>Confirme su correo en 48 horas</p>`
       })
       res.status(201).send({message: 'User created', user})
     } catch (error) {
@@ -28,9 +30,12 @@ const UserController = {
 
   async confirm(req, res) {
     try {
+      const token = req.params.emailToken
+      const payload = jwt.verify(token, jwt_secret)
+      console.log(payload)
       await User.update({ confirmed: true }, {
         where: {
-          email: req.params.email
+          email: payload.email
         }
       })
       res.status(201).send({ message: 'User confirmed' })
@@ -57,7 +62,7 @@ const UserController = {
       if (!isMatch) {
         return res.status(400).send({ message: 'Incorrect user/password' })
       }
-      const token = jwt.sign({ id: user }, jwt_secret)
+      const token = jwt.sign({ id: user.id }, jwt_secret)
       await Token.create({ token, UserId: user.id })
       res.send({ token, message: `Bienvenido ${user.name}`, user })
     } catch (error) {
