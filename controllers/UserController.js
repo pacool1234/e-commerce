@@ -6,7 +6,7 @@ const { Op } = Sequelize
 const transporter = require('../config/nodemailer')
 
 const UserController = {
-  async create(req, res) {
+  async create(req, res, next) {
     req.body.role = 'user'
     req.body.confirmed = false
     try {
@@ -24,7 +24,8 @@ const UserController = {
       res.status(201).send({ message: 'User created', user })
     } catch (error) {
       console.error(error)
-      res.status(500).send(error)
+      // res.status(500).send(error)
+      next(error)
     }
   },
 
