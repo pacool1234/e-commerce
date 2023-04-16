@@ -2,8 +2,10 @@ const express = require('express')
 const app = express()
 const PORT = 3000
 const { typeError } = require('./middleware/errors')
+const cors = require('cors')
 
 app.use(express.json())
+app.use(cors())
 
 app.use('/categories', require('./routes/categories'))
 app.use('/users', require('./routes/users'))
