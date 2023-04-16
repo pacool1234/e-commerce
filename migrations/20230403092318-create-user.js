@@ -10,17 +10,47 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            message: 'Introduce your name'
+          }
+        }
       },
+  
       surname: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            message: 'Introduce your surname'
+          }
+        }
       },
+  
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notNull: {
+            message: 'Introduce your email address'
+          },
+          isEmail: true
+        }
       },
+      
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            message: 'Introduce your password'
+          }
+        }
       },
+
       role: {
         type: Sequelize.STRING
       },

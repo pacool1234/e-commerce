@@ -14,9 +14,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Product.init({
-    name: DataTypes.STRING,
-    price: DataTypes.NUMERIC(10,2),
-    CategoryId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          message: 'Introduce product name'
+        }
+      }
+    },
+    price: {
+      type: DataTypes.NUMERIC(10, 2),
+      allowNull: false,
+      validate: {
+        notNull: {
+          message: 'Introduce product price'
+        }
+      }
+    },
+    CategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          message: 'Introduce product category ID'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',

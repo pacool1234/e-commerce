@@ -116,6 +116,21 @@ const ProductController = {
       console.error(error)
       res.status(500).send(error)
     }
+  },
+
+  async delete(req, res) {
+    try {
+      await Product.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      res.send({ message: 'Product deleted' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).send(error)
+    }
+
   }
 }
 

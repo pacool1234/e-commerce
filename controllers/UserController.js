@@ -11,7 +11,7 @@ const UserController = {
     req.body.confirmed = false
     try {
       const password = await bcrypt.hash(req.body.password, 10)
-      const user = await User.create({...req.body, password})
+      const user = await User.create({ ...req.body, password })
       const emailToken = jwt.sign({ email: req.body.email }, jwt_secret, { expiresIn: '48h' })
       const url = `http://localhost:3000/users/confirm/${emailToken}`
       await transporter.sendMail({
@@ -21,7 +21,7 @@ const UserController = {
         <a href='${url}'>Click to confirm your email</a>
         <p>Confirme su correo en 48 horas</p>`
       })
-      res.status(201).send({message: 'User created', user})
+      res.status(201).send({ message: 'User created', user })
     } catch (error) {
       console.error(error)
       res.status(500).send(error)
