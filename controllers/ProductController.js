@@ -20,8 +20,7 @@ const ProductController = {
             { model: Review, attributes: ['title', 'content'] }
         ]
       })
-      res.send(req.protocol)
-    //   res.send(products)
+      res.send(products)
     } catch (error) {
       console.error(error)
       res.status(500).send(error)
@@ -90,11 +89,24 @@ const ProductController = {
     }
   },
 
-  async orderByPice(req, res) {
+  async orderByPriceDesc(req, res) {
     try {
       const products = await Product.findAll({
         include: [{ model: Category, attributes: ['name'] }],
         order: [['price', 'DESC']]
+      })
+      res.send(products)
+    } catch (error) {
+      console.error(error)
+      res.status(500).send(error)
+    }
+  },
+
+  async orderByPriceAsc(req, res) {
+    try {
+      const products = await Product.findAll({
+        include: [{ model: Category, attributes: ['name'] }],
+        order: [['price', 'ASC']]
       })
       res.send(products)
     } catch (error) {
