@@ -25,6 +25,27 @@ My E-Shop Project is a modern, user-friendly e-commerce web application designed
 ## Installation
 
 1. Clone the repository to your local machine:
+```
+https://github.com/amsiceza/TBridge-Ecommerce-Project
+```
+2. Install dependencies
+```
+npm install
+```
+3. Set up environment variables
+
+4. Run migrations
+```
+ sequelize-cli db:migrate
+```
+5. Run seeders
+```
+sequelize-cli db:seed:all
+```
+6. Start the server
+```
+npm start
+```
 
 
 ## Authors ✒️ 
