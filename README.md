@@ -6,9 +6,7 @@ My E-Shop Project is a modern, user-friendly e-commerce web application designed
 
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Authors](#authors)
 
 ## Features
@@ -47,6 +45,15 @@ sequelize-cli db:seed:all
 npm start
 ```
 
+## Contribution
+
+If you'd like to contribute to this project, follow these steps:
+
+1. Fork the repository
+2. Create a new branch (git checkout -b feature/YourFeatureName)
+3. Commit your changes (git commit -m 'Add some feature')
+4. Push to the branch (git push origin feature/YourFeatureName)
+5. Create a new Pull Request
 
 ## Authors ✒️ 
 
